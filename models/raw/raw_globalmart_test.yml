@@ -1,0 +1,34 @@
+version: 2
+
+models: 
+  - name: raw_customer
+    columns:
+      - name: customerid
+        tests: 
+          - unique
+          - not_null
+  - name: raw_orders
+    columns:
+      - name: shipmode
+        tests:
+          - accepted_values:
+              values: 
+                - 'Second Class'
+                - 'Standard Class'
+                - 'First Class'
+                - 'Same Day'
+                - 'Unknown'
+      - name: orderid
+        tests:
+          - not_null
+      - name: customerid
+        tests:
+          - relationships:
+              to: ref('raw_customer')
+              field: customerid
+          
+          
+
+
+          
+        
